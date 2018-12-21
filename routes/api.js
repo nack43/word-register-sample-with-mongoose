@@ -10,6 +10,14 @@ router.get('/', (req, res) => {
     })
 })
 
+router.get('/:id', (req, res) => {
+    // get specific word
+    Word.findById(req.params.id, (err, word) => {
+        if (err) throw console.log(err);
+        res.send(JSON.stringify(word));
+    })
+})
+
 router.post('/word', (req, res) => {
     // save
     const newWord = Word({

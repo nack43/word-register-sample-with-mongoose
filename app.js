@@ -13,6 +13,6 @@ mongoose.connect(process.env.DB_URL);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/api', apiRouter);
+app.use('/api/words', apiRouter);
 
 app.listen(port, () => console.log(port));

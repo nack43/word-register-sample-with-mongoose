@@ -18,7 +18,7 @@ router.get('/:id', (req, res) => {
     })
 })
 
-router.post('/word', (req, res) => {
+router.post('/', (req, res) => {
     // save
     const newWord = Word({
         wordEn: req.body.wordEn,
@@ -27,12 +27,23 @@ router.post('/word', (req, res) => {
 
     newWord.save(err => {
         if (err) throw console.log(err);
-        res.send('Sucsess');
+        res.send('Success');
     });
 })
 
-router.put('/word/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     // update
+    Word.findById(req.params.id, (err, word) => {
+        if (err) throw console.log(err);
+        
+        word.wordEn = req.body.wordEn;
+        word.wordJa = req.body.wordJa;
+
+        word.save(err => {
+            if (err) throw console.log(err);
+            res.send(JSON.stringify(word));
+        })
+    })
 });
 
 module.exports = router;

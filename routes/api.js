@@ -46,4 +46,16 @@ router.put('/:id', (req, res) => {
     })
 });
 
+router.delete('/:id', (req, res) => {
+    // delete
+    Word.findById(req.params.id, (err, word) => {
+        if (err) throw console.log(err);
+
+        word.remove({ _id: req.body.id }, err => {
+            if (err) throw console.log(err);
+            res.send('Success');
+        });
+    })
+})
+
 module.exports = router;
